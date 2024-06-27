@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun Website</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        overflow: hidden;
+    }
+    #container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .box {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        transition: all 0.5s ease-out;
+        pointer-events: none;
+    }
+    .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 5em;
+        color: red;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+<div id="container"></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('container');
+    let boxes = [];
+    let count = 0;
+    
+    function createBoxes() {
+        for (let i = 0; i < 10; i++) {
+            const box = document.createElement('div');
+            box.classList.add('box');
+            box.style.left = `${Math.random() * 90}vw`;
+            box.style.top = `${Math.random() * 90}vh`;
+            container.appendChild(box);
+            boxes.push(box);
+        }
+    }
+
+    function moveBoxes() {
+        boxes.forEach(box => {
+            box.style.left = '50vw';
+            box.style.top = '50vh';
+            box.style.opacity = '0';
+        });
+    }
+
+    function showNumber() {
+        const centered = document.createElement('div');
+        centered.classList.add('centered');
+        centered.textContent = count + 1;
+        container.appendChild(centered);
+        setTimeout(() => {
+            container.removeChild(centered);
+            boxes.forEach(box => container.removeChild(box));
+            boxes = [];
+            count++;
+            if (count < 6) {
+                createBoxes();
+            } else {
+                count = 0;
+                createBoxes();
+            }
+        }, 6000);
+    }
+
+    createBoxes();
+
+    container.addEventListener('click', function() {
+        moveBoxes();
+        showNumber();
+    });
+});
+</script>
+</body>
+</html>
