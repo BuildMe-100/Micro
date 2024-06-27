@@ -22,7 +22,7 @@
     .box {
         position: absolute;
         width: 30px;
-        height: 30px;
+        height: 50px;
         background-color: red;
         transition: all 0.5s ease-out;
         pointer-events: none;
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let count = 0;
     
     function createBoxes() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 100; i++) {
             const box = document.createElement('div');
             box.classList.add('box');
             box.style.left = `${Math.random() * 90}vw`;
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 count = 0;
                 createBoxes();
             }
-        }, 6000);
+        }, 3000);
     }
 
     createBoxes();
